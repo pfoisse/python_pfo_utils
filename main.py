@@ -1,4 +1,5 @@
 from photos.pfo_photos import extract_some_exif_data
+from dictionnaires.pfo_dictionnaires import printd
 
 chemin = '/Users/pierre/Desktop/images'
 
@@ -14,7 +15,7 @@ selection = [
 
 data = extract_some_exif_data(chemin, filename, selection)
 
-print(data)
+printd(data)
 
 
 
