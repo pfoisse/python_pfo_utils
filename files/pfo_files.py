@@ -1,3 +1,5 @@
+"""Module providing some functions to work with files"""
+
 import os
 
 def list_files_in_repertoire(folder_path):
@@ -15,6 +17,8 @@ def list_files_in_repertoire(folder_path):
         
     """
 
-    fichiers = sorted([f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f)) and not f.startswith('.')])
-    
+    fichiers = sorted([f for f in os.listdir(folder_path)
+                    if os.path.isfile(os.path.join(folder_path, f))
+                    and not f.startswith('.')])
+
     return fichiers

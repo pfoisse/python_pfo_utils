@@ -1,3 +1,4 @@
+"""Module providing some functions to work with dictionaires"""
 
 # ! --------------------------------------------
 def printd(dico):

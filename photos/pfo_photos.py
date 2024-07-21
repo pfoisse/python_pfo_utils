@@ -1,3 +1,5 @@
+"""Module providing some functions to work with photos"""
+
 from exif import Image
 
 # ! --------------------------------------------
@@ -43,7 +45,7 @@ def extract_all_exif_data(folder_path, img_filename):
 
     # si l image continet des donnees EXIF
     if image.has_exif:
-        
+
         # extraire la liste de  tous les paralmetres EXIF contenus dans la photo
         data = image.list_all()
 
@@ -64,7 +66,8 @@ def extract_all_exif_data(folder_path, img_filename):
 
         d={}
 
-    # retourner le dictionnaire 
+    # retourner le dictionnaire
+
     return d
 
 # ! --------------------------------------------
@@ -154,4 +157,3 @@ def extract_some_exif_data(folder_path, img_filename, selection):
         d[tag] = value
 
     return d
-

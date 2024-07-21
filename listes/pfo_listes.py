@@ -1,3 +1,4 @@
+"""Module providing some functions to work with list"""
 
 # ! --------------------------------------------
 def printl(liste):
@@ -18,9 +19,9 @@ def printl(liste):
 
     for item in liste:
 
-        
         print(i)
         print('>', item)
         print()
 
         i = i + 1
+        
