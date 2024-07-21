@@ -11,9 +11,7 @@ def printd(dico):
         affiche le contenu du dictionnaire
 
     Example:
-        >>> extraire_donnees_exif('images', 'toto.jpg')
         
-
     """
 
     for item in dico:
