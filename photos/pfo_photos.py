@@ -1,4 +1,8 @@
-"""Module providing some functions to work with photos"""
+"""Module providing some functions to work with photos
+extraction des informations EXIF (Exchangeable image file format) d'une photo. 
+L'information EXIF contient des métadonnées sur une image, comme la résolution, 
+le format, les informations de prise de vue, etc.
+"""
 
 import datetime
 
@@ -7,7 +11,10 @@ from exif import Image
 # ! --------------------------------------------------------------------------------------
 def extract_all_exif_data(folder_path, img_filename):
     """
-    Extraire toutes les données EXIF d une photo 
+    Cette fonction extrait toutes les données EXIF d'une photo. 
+    Elle prend en argument le chemin du répertoire où se trouve la photo 
+    et le nom du fichier de la photo. 
+    Elle retourne un dictionnaire contenant toutes les données EXIF de la photo.
 
     Args:
         folder_path (chain): chemin du repertoire où se trouve la photo.
@@ -75,7 +82,10 @@ def extract_all_exif_data(folder_path, img_filename):
 # ! --------------------------------------------------------------------------------------
 def extract_one_exif_data(folder_path, img_filename, exif_tag):
     """
-    Extraire une seule donnee EXIF d une photo 
+    Cette fonction extrait une seule donnée EXIF d'une photo. 
+    Elle prend en argument le chemin du répertoire où se trouve la photo, 
+    le nom du fichier de la photo et le nom du paramètre EXIF recherché. 
+    Elle retourne la valeur du paramètre EXIF recherché.
 
     Args:
         folder_path (chain): chemin du repertoire où se trouve la photo.
@@ -126,7 +136,10 @@ def extract_one_exif_data(folder_path, img_filename, exif_tag):
 ## ! --------------------------------------------------------------------------------------
 def extract_some_exif_data(folder_path, img_filename, tag_selection):
     """
-    Extraire plusieurs donnees EXIF d une photo 
+    Cette fonction extrait plusieurs données EXIF d'une photo. 
+    Elle prend en argument le chemin du répertoire où se trouve la photo, 
+    le nom du fichier de la photo et une liste des noms des paramètres EXIF recherchés. 
+    Elle retourne un dictionnaire contenant les valeurs des paramètres EXIF recherchés.
 
     Args:
         folder_path (chain): chemin du repertoire où se trouve la photo.
@@ -163,7 +176,11 @@ def extract_some_exif_data(folder_path, img_filename, tag_selection):
 # ! --------------------------------------------------------------------------------------
 def change_exif_data(folder_path, img_filename, exif_tag, new_value):
     """
-    Changer la valeur d'une donnee EXIF d une photo     
+    Cette fonction permet de changer la valeur d'un paramètre EXIF d'une photo. 
+    Elle prend en argument le chemin du répertoire où se trouve la photo, 
+    le nom du fichier de la photo, le nom du paramètre EXIF à modifier 
+    et la nouvelle valeur de la donnée EXIF. 
+    Elle retourne la nouvelle photo avec le nouveau paramètre EXIF.     
 
     Args:
         folder_path (chain): chemin du repertoire où se trouve la photo.
@@ -207,7 +224,10 @@ def change_exif_data(folder_path, img_filename, exif_tag, new_value):
 # ! --------------------------------------------------------------------------------------
 def change_date(folder_path, img_filename, new_date):
     """
-    Changer la date d une photo     
+    Cette fonction permet de changer la date d'une photo. 
+    Elle prend en argument le chemin du répertoire où se trouve la photo, 
+    le nom du fichier de la photo et la nouvelle date de la photo. 
+    Elle retourne la nouvelle photo avec la nouvelle date.     
 
     Args:
         folder_path (chain): chemin du repertoire où se trouve la photo.
@@ -227,7 +247,10 @@ def change_date(folder_path, img_filename, new_date):
 # ! --------------------------------------------------------------------------------------
 def change_copyright(folder_path, img_filename, new_copyright):
     """
-    Changer le copyright d une photo     
+    Cette fonction permet de changer le copyright d'une photo. 
+    Elle prend en argument le chemin du répertoire où se trouve la photo, 
+    le nom du fichier de la photo et le nouveau copyright de la photo. 
+    Elle retourne la nouvelle photo avec le nouveau copyright.    
 
     Args:
         folder_path (chain): chemin du repertoire où se trouve la photo.

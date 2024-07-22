@@ -3,7 +3,9 @@
 # ! --------------------------------------------
 def printl(liste):
     """
-    Afficher le contenu d une liste de facon claire et formatée
+    Affiche le contenu d'une liste de manière claire et formatée. 
+    Cette fonction prend en argument une liste et affiche chaque élément de la liste 
+    avec un numéro d'ordre.
 
     Args:
         liste (list): nom de la liste
@@ -12,6 +14,21 @@ def printl(liste):
         affiche le contenu de la liste
 
     Example:
+    liste = ['a', 'b', 'c', 'd']
+    printl(liste)
+
+    Cela donnera :
+    0
+    > a
+
+    1
+    > b
+
+    2
+    > c
+
+    3
+    > d
         
     """
 

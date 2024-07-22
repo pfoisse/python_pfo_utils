@@ -1,6 +1,6 @@
 """Module providing to test some functions"""
 
-import os
+
 
 from dictionnaires.pfo_dictionnaires import printd
 

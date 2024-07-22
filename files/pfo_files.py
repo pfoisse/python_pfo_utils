@@ -6,6 +6,8 @@ import os
 def list_files_in_directory(folder_path):
     """
     Lister le contenu d un répertoire
+    Cette fonction liste les fichiers présents dans un répertoire spécifique. 
+    Elle ne liste pas les fichiers cachés (ceux qui commencent par un point).
 
     Args:
         folder_path (chain): chemin vers le répertoire
@@ -28,6 +30,8 @@ def list_files_in_directory(folder_path):
 def list_all_files(folder_path):
     """
     Lister le contenu d un répertoire y compris dans les sous-répertoires
+    Cette fonction liste les fichiers présents dans un répertoire spécifique 
+    ainsi que dans tous les sous-répertoires.
 
     Args:
         folder_path (chain): chemin vers le répertoire
@@ -59,9 +63,10 @@ def list_all_files(folder_path):
     return liste
 
 # ! --------------------------------------------------------------------------------------
-def get_directory_name(item):
+def get_directory_name(folder_path):
     """
     Donner le nom du répertoire qui contient un fichier
+    Cette fonction donne le nom du répertoire qui contient un fichier spécifique.
     Dans ce code, la fonction get_directory_name utilise la fonction os.path.dirname
     pour obtenir le nom du répertoire qui contient le fichier. 
     Ensuite, elle utilise la méthode split pour séparer le nom du répertoire 
@@ -80,7 +85,7 @@ def get_directory_name(item):
     """
 
     # Obtenir le chemin complet du fichier
-    a = os.path.dirname(item)
+    a = os.path.dirname(folder_path)
     
     # Split le chemin complet du fichier par '/'
     a = a.split('/')
