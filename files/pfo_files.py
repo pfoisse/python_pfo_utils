@@ -2,11 +2,11 @@
 
 import os
 import pandas as pd
+from photos.pfo_photos import get_date
 
 # ! --------------------------------------------------------------------------------------
 def list_files_in_directory(folder_path):
     """
-    Lister le contenu d un répertoire
     Cette fonction liste les fichiers présents dans un répertoire spécifique. 
     Elle ne liste pas les fichiers cachés (ceux qui commencent par un point).
 
@@ -30,7 +30,6 @@ def list_files_in_directory(folder_path):
 # ! --------------------------------------------------------------------------------------
 def list_all_files(folder_path):
     """
-    Lister le contenu d un répertoire y compris dans les sous-répertoires
     Cette fonction liste les fichiers présents dans un répertoire spécifique 
     ainsi que dans tous les sous-répertoires. 
     Cette fonction ne liste pas les fichés cachés (ceux qui commencent par un point).
@@ -152,19 +151,23 @@ def get_all_files_content_in_a_dataframe(folder_path):
     Example:
         
     """
-
+    # Lister les fichiers présents dans le dossier et dans tous les sous-dossiers
     liste = list_all_files(folder_path)
 
     # Créer une liste de dictionnaires pour stocker les données
     data_list = []
 
+    # Parcourir les chemins de fichiers
     for chemin in liste:
+
         directory_name = get_directory_name(chemin)
         file_name = get_file_name(chemin)
+        date = get_date(folder_path, file_name)
         data_dict = {
             'chemin': chemin,
             'nom du fichier': file_name,
-            'nom du répertoire': directory_name
+            'nom du répertoire': directory_name,
+            'date': date
         }
         data_list.append(data_dict)
 
@@ -172,3 +175,61 @@ def get_all_files_content_in_a_dataframe(folder_path):
     df = pd.DataFrame(data_list)
 
     return(df)
+
+# ! --------------------------------------------------------------------------------------
+def decoupe_chemin(folder_path):
+    """
+    La fonction decoupe_chemin prend en entrée un chemin d'accès à un fichier 
+    et retourne un dictionnaire contenant les informations suivantes :
+        chemin complet : le chemin complet du fichier
+        nom du répertoire : le nom du répertoire où se trouve le fichier
+        nom du fichier : le nom du fichier sans l'extension
+        extension : l'extension du fichier (par exemple, "JPG" ou "PNG")
+
+    La fonction utilise les fonctions os.path.basename() 
+    et os.path.splitext() pour séparer le nom du fichier et l'extension. 
+    Ensuite, elle utilise la méthode rstrip('/') pour enlever le dernier '/' 
+    du chemin complet.
+
+    La fonction retourne ensuite un dictionnaire contenant les informations 
+    décrites ci-dessus.
+    
+    Args:
+        folder_path (chain): chemin vers le nom du fichier
+        ex : '/Users/pierre/Desktop/images/divers/2019-02-12/IMAG0041.JPG'
+
+    Returns:
+        This code will output:
+            'chemin complet' :  /Users/pierre/Desktop/images/divers
+            'nom du répertoire' :  divers
+            'nom du fichier' :  IMAG0041.JPG
+            'extension' :  JPG
+        """
+    
+   # Utiliser os.path.basename() pour obtenir le nom du fichier sans le chemin
+    nom_fichier_avec_extension = os.path.basename(folder_path)
+
+    # Utiliser os.path.splitext() pour séparer le nom du fichier et l'extension
+    nom_fichier, extension = os.path.splitext(nom_fichier_avec_extension)
+
+    # Obtenir le nom du répertoire sans le dernier '/'
+    chemin_complet = os.path.dirname(folder_path).rstrip('/')
+
+    # Utiliser os.path.basename() pour obtenir le nom du répertoire
+    nom_repertoire = os.path.basename(chemin_complet)
+
+    # Enlever le dernier '.' de l'extension
+    extension = extension.lstrip('.')
+
+    # Combine le nom du répertoire et le nom du fichier pour le nom du fichier
+    nom_fichier = nom_fichier + '.' + extension
+
+    # Retourner le dictionnaire contenant les informations décrites ci-dessus
+    return {
+        'chemin complet': chemin_complet,
+        'nom du fichier': nom_fichier, 
+        'nom du répertoire': nom_repertoire, 
+        'extension': extension
+    }
+
+

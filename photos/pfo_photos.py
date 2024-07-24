@@ -174,6 +174,29 @@ def extract_some_exif_data(folder_path, img_filename, tag_selection):
     return d
 
 # ! --------------------------------------------------------------------------------------
+def get_date(folder_path, img_filename):
+    """
+    Cette fonction extrait la date d'une photo.
+
+    Args:
+        folder_path (chain): chemin du repertoire où se trouve la photo.
+        img_filename (chain): nom de fichier de la photo.
+
+    Returns:
+        str: valeur du paramètre EXIF 'datetime_original'.
+
+    Example:
+        >>> get_date('images', 'toto.jpg')
+        2024:07:20 14:34:24 
+
+    """
+
+    # extraire la date de la photo
+    value = extract_one_exif_data(folder_path, img_filename, 'datetime_original')
+
+    return value
+
+# ! --------------------------------------------------------------------------------------
 def change_exif_data(folder_path, img_filename, exif_tag, new_value):
     """
     Cette fonction permet de changer la valeur d'un paramètre EXIF d'une photo. 
