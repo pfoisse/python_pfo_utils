@@ -2,7 +2,7 @@
 
 import os
 import pandas as pd
-from photos.pfo_photos import get_date
+from photos.pfo_photos import get_original_date
 
 # ! --------------------------------------------------------------------------------------
 def list_all_files(folder_path):

@@ -80,7 +80,7 @@ def get_all_exif_data(folder_path, img_filename):
     return d
 
 # ! --------------------------------------------------------------------------------------
-def extract_one_exif_data(folder_path, img_filename, exif_tag):
+def get_one_exif_data(folder_path, img_filename, exif_tag):
     """
     Cette fonction extrait une seule donnée EXIF d'une photo. 
     Elle prend en argument le chemin du répertoire où se trouve la photo, 
@@ -134,7 +134,7 @@ def extract_one_exif_data(folder_path, img_filename, exif_tag):
     return data[exif_tag]
 
 ## ! --------------------------------------------------------------------------------------
-def extract_some_exif_data(folder_path, img_filename, tag_selection):
+def get_some_exif_data(folder_path, img_filename, tag_selection):
     """
     Cette fonction extrait plusieurs données EXIF d'une photo. 
     Elle prend en argument le chemin du répertoire où se trouve la photo, 
@@ -168,36 +168,13 @@ def extract_some_exif_data(folder_path, img_filename, tag_selection):
 
     for tag in tag_selection:
 
-        value = extract_one_exif_data(folder_path, img_filename, tag)
+        value = get_one_exif_data(folder_path, img_filename, tag)
         d[tag] = value
 
     return d
 
 # ! --------------------------------------------------------------------------------------
-def get_date(folder_path, img_filename):
-    """
-    Cette fonction extrait la date d'une photo.
-
-    Args:
-        folder_path (chain): chemin du repertoire où se trouve la photo.
-        img_filename (chain): nom de fichier de la photo.
-
-    Returns:
-        str: valeur du paramètre EXIF 'datetime_original'.
-
-    Example:
-        >>> get_date('images', 'toto.jpg')
-        2024:07:20 14:34:24 
-
-    """
-
-    # extraire la date de la photo
-    value = extract_one_exif_data(folder_path, img_filename, 'datetime_original')
-
-    return value
-
-# ! --------------------------------------------------------------------------------------
-def change_exif_data(folder_path, img_filename, exif_tag, new_value):
+def set_exif_data(folder_path, img_filename, exif_tag, new_value):
     """
     Cette fonction permet de changer la valeur d'un paramètre EXIF d'une photo. 
     Elle prend en argument le chemin du répertoire où se trouve la photo, 
@@ -221,7 +198,7 @@ def change_exif_data(folder_path, img_filename, exif_tag, new_value):
         La nouvelle photo avec le nouveau tag EXIF
 
     Example:
-        >>> change_exif_data('images', 'toto.jpg', 'datetime_original', '2024:07:20 14:34:24')
+        >>> set_exif_data('images', 'toto.jpg', 'datetime_original', '2024:07:20 14:34:24')
 
     """
     # On crée le chemin d acces à l'image
@@ -245,7 +222,76 @@ def change_exif_data(folder_path, img_filename, exif_tag, new_value):
         new_image_file.write(image.get_file())
 
 # ! --------------------------------------------------------------------------------------
-def change_date(folder_path, img_filename, new_date):
+def get_original_date(folder_path, img_filename):
+    """
+    Extrait la date originale d'une photo.
+
+    Args:
+        chemin_dossier (str): Le chemin du dossier où se trouve la photo.
+        nom_fichier (str): Le nom du fichier de la photo.
+
+    Returns:
+        str: La valeur du paramètre EXIF 'datetime_original', qui représente la date originale de la photo.
+
+    Exemple:
+        >>> get_original_date('images', 'toto.jpg')
+        2024:07:20 14:34:24
+    """
+
+    # extraire la date de la photo
+    value = get_one_exif_data(folder_path, img_filename, 'datetime_original')
+
+    return value
+
+# ! --------------------------------------------------------------------------------------
+def set_original_date(folder_path, img_filename, new_date):
+    """
+    Cette fonction permet de changer la date originale d'une photo. 
+    Elle prend en argument le chemin du répertoire où se trouve la photo, 
+    le nom du fichier de la photo et la nouvelle date de la photo. 
+    Elle retourne la nouvelle photo avec la nouvelle date.     
+
+    Args:
+        folder_path (chain): chemin du repertoire où se trouve la photo.
+        img_filename (chain): nom de fichier de la photo.
+        new_date (datetime): nouvelle date de la photo.
+        
+    Returns:
+        La nouvelle photo avec le nouveau tag EXIF
+
+    Example:
+        >>> set_exif_data('images', 'toto.jpg', '2024:07:20 14:34:24')
+
+    """
+
+    set_exif_data(folder_path, img_filename, 'datetime_original', new_date)
+
+# ! --------------------------------------------------------------------------------------
+def get_digitized_date(folder_path, img_filename):
+    
+    """
+    Cette fonction extrait la date digitized d'une photo.
+
+    Args:
+        folder_path (chain): chemin du repertoire où se trouve la photo.
+        img_filename (chain): nom de fichier de la photo.
+
+    Returns:
+        str: valeur du paramètre EXIF 'datetime_original'.
+
+    Example:
+        >>> get_original_date('images', 'toto.jpg')
+        2024:07:20 14:34:24 
+
+    """
+
+    # extraire la date de la photo
+    value = get_one_exif_data(folder_path, img_filename, 'datetime_digitized')
+
+    return value
+
+# ! --------------------------------------------------------------------------------------
+def set_digitized_date(folder_path, img_filename, new_date):
     """
     Cette fonction permet de changer la date d'une photo. 
     Elle prend en argument le chemin du répertoire où se trouve la photo, 
@@ -261,14 +307,14 @@ def change_date(folder_path, img_filename, new_date):
         La nouvelle photo avec le nouveau tag EXIF
 
     Example:
-        >>> change_exif_data('images', 'toto.jpg', '2024:07:20 14:34:24')
+        >>> set_exif_data('images', 'toto.jpg', '2024:07:20 14:34:24')
 
     """
 
-    change_exif_data(folder_path, img_filename, 'datetime_original', new_date)
+    set_exif_data(folder_path, img_filename, 'datetime_digitized', new_date)
 
 # ! --------------------------------------------------------------------------------------
-def change_copyright(folder_path, img_filename, new_copyright):
+def set_copyright(folder_path, img_filename, new_copyright):
     """
     Cette fonction permet de changer le copyright d'une photo. 
     Elle prend en argument le chemin du répertoire où se trouve la photo, 
@@ -284,10 +330,10 @@ def change_copyright(folder_path, img_filename, new_copyright):
         La nouvelle photo avec le nouveau tag EXIF
 
     Example:
-        >>> change_exif_data('images', 'toto.jpg', 'FOISSELON')
+        >>> set_exif_data('images', 'toto.jpg', 'FOISSELON')
 
     """
 
-    change_exif_data(folder_path, img_filename, 'copyright', new_copyright)
+    set_exif_data(folder_path, img_filename, 'copyright', new_copyright)
 
         
