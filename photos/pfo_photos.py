@@ -9,7 +9,7 @@ import datetime
 from exif import Image
 
 # ! --------------------------------------------------------------------------------------
-def extract_all_exif_data(folder_path, img_filename):
+def get_all_exif_data(folder_path, img_filename):
     """
     Cette fonction extrait toutes les données EXIF d'une photo. 
     Elle prend en argument le chemin du répertoire où se trouve la photo 
@@ -128,7 +128,7 @@ def extract_one_exif_data(folder_path, img_filename, exif_tag):
     """
 
     #extraire toutes les données EXIF
-    data = extract_all_exif_data(folder_path, img_filename)
+    data = get_all_exif_data(folder_path, img_filename)
 
     # retourner la valeur du dictionnaire correspondant a la cle exif_data
     return data[exif_tag]

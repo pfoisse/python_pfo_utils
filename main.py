@@ -3,7 +3,7 @@
 import pandas as pd
 
 from files.pfo_files import list_all_files
-from files.pfo_files import decoupe_chemin
+from files.pfo_files import get_files_data
 
 from photos.pfo_photos import get_date
 
@@ -19,7 +19,7 @@ data_list = []
 for chemin in liste:
 
     # Obtenir les informations du répertoire et du fichier
-    data_dict = decoupe_chemin(chemin)
+    data_dict = get_files_data(chemin)
 
     # Obtenir la date de la photo 
     folder_path = data_dict['chemin complet']
