@@ -8,13 +8,17 @@ from files.pfo_files import get_files_data
 from photos.pfo_photos import get_original_date
 from photos.pfo_photos import set_original_date
 
-chemin = '/Users/pierre/Desktop/images/test1'
+from dates.pfo_dates import date_today
+
+chemin = '/Users/pierre/Desktop/images/test2'
 
 # Lister les fichiers présents dans le dossier et dans tous les sous-dossiers
 liste = list_all_files(chemin)
 
 # Créer une liste de dictionnaires pour stocker les données
 data_list = []
+
+i = 0
 
 # Parcourir les chemins de fichiers
 for chemin in liste:
@@ -32,10 +36,11 @@ for chemin in liste:
 
     nom_repertoire = data_dict['nom du répertoire']
 
-    date_originale = set_original_date(folder_path, img_filename, nom_repertoire)
-    
-    # Ajouter la date de la photo au dictionnaire 
-    data_dict['date_originale'] = date_originale
+    # Remplacer le séparateur '-' par un séparateur ':' pour la date originale
+    new_date = nom_repertoire.replace('-', ':')                               
+
+    # Ajouter la date original et de la date digitilized de la photo au dictionnaire 
+    data_dict['date_originale'] = new_date
     data_dict['date_digitized'] = date_digitized
     
     # Ajouter le dictionnaire au DataFrame
@@ -64,6 +69,7 @@ selection = [
     ]
 
 print(df[selection])
+
 
 
 
