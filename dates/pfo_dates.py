@@ -64,7 +64,6 @@ def get_current_date():
     """
     return datetime.now()
     
-
 # ! --------------------------------------------
 def get_all_data_from_date(date_string):
     """
@@ -147,4 +146,27 @@ def convert_string_to_datetime(date_string):
     """
     return datetime.strptime(date_string, '%Y-%m-%d')
 
+# ! --------------------------------------------
+def convert_datetime_to_string(date_obj, option = 'tiret'):
+    """
+    Convert a datetime object to a string in a specified format.
+
+    Args:
+        date_obj (datetime.datetime): The datetime object to be converted.
+        option (str, optional): The format of the output string. 
+        Defaults to 'tiret' (YYYY-MM-DD HH:MM:SS).
+
+    Returns:
+        str: The datetime object converted to a string in the specified format.
+
+    Example:
+        >>> convert_datetime_to_string(datetime.now(), 'slash')
+    """
+    if option == 'tiret':
+        return date_obj.strftime('%Y-%m-%d %H:%M:%S') 
     
+    if option == 'slash':
+        return date_obj.strftime('%Y/%m/%d %H:%M:%S')
+    
+    if option == 'double_points':
+        return date_obj.strftime('%Y:%m:%d %H:%M:%S')

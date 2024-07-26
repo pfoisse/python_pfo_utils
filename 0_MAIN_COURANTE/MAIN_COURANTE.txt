@@ -1,0 +1,6 @@
+25 juillet : 
+module date terminé, à tester avec le module photo
+
+26 juillet : 
+test OK avec le module photo, creer dans main.py une fonction qui liste 
+les caracterisques EXIF des photos sans les modifier
