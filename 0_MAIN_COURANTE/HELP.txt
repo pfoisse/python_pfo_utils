@@ -1,2 +1,7 @@
 PANDAS
 https://sites.google.com/view/aide-python/prise-en-main-de-python/les-objets-python/les-dataframes-python-avec-panda
+
+PYTHON
+https://www.pierre-giraud.com/python-apprendre-programmer-cours/#google_vignette
+https://zestedesavoir.com/tutoriels/799/apprendre-a-programmer-avec-python-3/1228_les-bases-de-python/4970_decouper-son-code/
+

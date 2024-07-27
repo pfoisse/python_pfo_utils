@@ -4,9 +4,10 @@ L'information EXIF contient des métadonnées sur une image, comme la résolutio
 le format, les informations de prise de vue, etc.
 """
 
-import datetime
-
 from exif import Image
+
+#from files.pfo_files import list_all_files, get_files_data
+#from dates.pfo_dates import convert_string_to_datetime, set_duree, convert_datetime_to_string
 
 # ! --------------------------------------------------------------------------------------
 def get_all_exif_data(folder_path, img_filename):
@@ -336,4 +337,151 @@ def set_copyright(folder_path, img_filename, new_copyright):
 
     set_exif_data(folder_path, img_filename, 'copyright', new_copyright)
 
+#! --------------------------------------------------------------------------------------
+def get_copyright(folder_path, img_filename):
+    """
+    Cette fonction extrait le copyright d'une photo.
+
+    Args:
+        folder_path (chain): chemin du repertoire où se trouve la photo.
+        img_filename (chain): nom de fichier de la photo.
+
+    Returns:
+        str: valeur du paramètre EXIF 'copyright'.
+
+    Example:
+        >>> get_copyright('images', 'toto.jpg')
+        FOISSELON 
+
+    """
+
+    # extraire le copyright de la photo
+    value = get_one_exif_data(folder_path, img_filename, 'copyright')
+
+    return value
+
+##! --------------------------------------------------------------------------------------
+def show_all_photos_files_caracterictics(folder_path):
+    """
+    Cette fonction affiche les caractéristiques des photos dans un répertoire 
+    et dans tous ses sous-dossiers.
+
+    Args:
+        folder_path (chain): chemin du répertoire où se trouve les photos.
+
+    Returns:
+        None
+
+    Example:
+        >>> show_all_files_caracterictics('images')
+    """
+    import pandas as pd
+    from files.pfo_files import list_all_files, get_files_data
+
+    # Lister les fichiers présents dans le dossier et dans tous les sous-dossiers
+    liste = list_all_files(folder_path)
+
+    # Créer une liste de dictionnaires pour stocker les données
+    data_list = []
+
+    # Parcourir les chemins de fichiers
+    for chemin in liste:
+
+        # Obtenir les informations du répertoire et du fichier
+        data_dict = get_files_data(chemin)
+
+        # Obtenir les dates original et digitized de la photo 
+        folder_path = data_dict['chemin complet']
+        img_filename = data_dict['nom du fichier']
+
+        # Récupérer la date de la photo et la mettre dans date digitized
+        data_dict['date_originale'] = get_original_date(folder_path, img_filename)
+        data_dict['date_digitized'] = get_digitized_date(folder_path, img_filename)
+        
+        # Ajouter le dictionnaire au DataFrame
+        data_list.append(data_dict)
+
+    # Convertir la liste de dictionnaires en un DataFrame pandas
+    df = pd.DataFrame(data_list)
+
+    # Afficher le DataFrame
+    pd.set_option('display.max_colwidth', 0)
+    pd.set_option('display.max_rows', 0)
+    pd.options.display.width = 0
+    pd.options.display.max_seq_items = 1000
+    pd.options.display.float_format = '{:,.2f}'.format
+    pd.options.display.precision = 2
+    pd.options.display.max_columns = None
+    pd.options.display.max_rows = None
+
+    selection = [
+        'nom du fichier', 
+        'nom du répertoire',
+        'date_originale', 
+        'date_digitized'
+        ]
+
+    print(df[selection])
+
+#! --------------------------------------------------------------------------------------
+def change_all_original_dates_according_to_directories_names(folder_path):
+    """
+    Cette fonction modifie la date originale de toutes les photos dans un répertoire 
+    et dans tous ses sous-dossiers.
+
+    Args:
+    folder_path (chain): chemin du répertoire où se trouve les photos.
+
+    Returns:
+
+    """
+
+    from files.pfo_files import list_all_files, get_files_data
+    from dates.pfo_dates import convert_string_to_datetime, set_duree, convert_datetime_to_string
+
+    # Lister les fichiers présents dans le dossier et dans tous les sous-dossiers
+    liste = list_all_files(folder_path)
+
+    # Initialiser le compteur de fichiers
+    i = 0
+
+    # Initialiser le nom du répertoire précédent
+    previous_repertoire_name = ''
+
+    # Parcourir tous les chemins de fichiers
+    for chemin in liste:
+
+        # Obtenir les informations du répertoire et du fichier
+        data = get_files_data(chemin)
+
+        # Obtenir les dates original et digitized de la photo 
+        folder_path = data['chemin complet']
+        img_filename = data['nom du fichier']
+        
+        nom_repertoire = data['nom du répertoire']
+        
+        # si le fichier est encore dans le meme repertoire
+        # alors ajouter 1 seconde a la date du fichier
+        # sinon reinitialiser le compteur
+        if nom_repertoire == previous_repertoire_name:
+            i = i + 1
+        else:
+            i = 0
+
+        # Convertir la date du répertoire en datetime
+        new_date = convert_string_to_datetime(nom_repertoire)
+
+        # Ajouter la durée de 1 seconde au dernier enregistrement de la photo
+        duree = set_duree(seconds=1)
+        new_date = new_date + i * duree 
+
+        # Convertir la date en string avec le format double points
+        new_date = convert_datetime_to_string(new_date, 'double_points')
+        
+        # Ajouter la date original et de la date digitilized de la photo au dictionnaire 
+        set_original_date(folder_path, img_filename, new_date)
+
+        previous_repertoire_name = nom_repertoire
+
+    
         
