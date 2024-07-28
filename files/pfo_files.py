@@ -42,9 +42,9 @@ def list_all_files(folder_path):
     return liste
 
 # ! --------------------------------------------------------------------------------------
-def get_files_data(folder_path):
+def get_file_infos(folder_path):
     """
-    La fonction get_files_data prend en entrée un chemin d'accès à un fichier 
+    La fonction get_file_infos prend en entrée un chemin d'accès à un fichier 
     et retourne un dictionnaire contenant les informations suivantes :
         chemin complet : le chemin complet du fichier
         nom du répertoire : le nom du répertoire où se trouve le fichier
@@ -73,18 +73,27 @@ def get_files_data(folder_path):
     
    # Utiliser os.path.basename() pour obtenir le nom du fichier sans le chemin
     nom_fichier_avec_extension = os.path.basename(folder_path)
+    #print(f'Nom du fichier avec extension : {nom_fichier_avec_extension}')
 
     # Utiliser os.path.splitext() pour séparer le nom du fichier et l'extension
     nom_fichier, extension = os.path.splitext(nom_fichier_avec_extension)
-
+    
     # Obtenir le nom du répertoire sans le dernier '/'
     chemin_complet = os.path.dirname(folder_path).rstrip('/')
+    #print('chemin complet :', chemin_complet)
+
+    chemin_decoupe = chemin_complet.split('/')
+    #print('chemin découpe :', chemin_decoupe)
 
     # Utiliser os.path.basename() pour obtenir le nom du répertoire
     nom_repertoire = os.path.basename(chemin_complet)
+    #print('Nom du répertoire :', nom_repertoire)
 
     # Enlever le dernier '.' de l'extension
     extension = extension.lstrip('.')
+    #print('Extension :', extension)
+
+    print()
 
     # Combine le nom du répertoire et le nom du fichier pour le nom du fichier
     nom_fichier = nom_fichier + '.' + extension
@@ -96,5 +105,7 @@ def get_files_data(folder_path):
         'nom du répertoire': nom_repertoire, 
         'extension': extension
     }
+
+
 
 

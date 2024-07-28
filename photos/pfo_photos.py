@@ -6,7 +6,7 @@ le format, les informations de prise de vue, etc.
 
 from exif import Image
 
-#from files.pfo_files import list_all_files, get_files_data
+#from files.pfo_files import list_all_files, get_file_infos
 #from dates.pfo_dates import convert_string_to_datetime, set_duree, convert_datetime_to_string
 
 # ! --------------------------------------------------------------------------------------
@@ -376,7 +376,7 @@ def show_all_photos_files_caracterictics(folder_path):
         >>> show_all_files_caracterictics('images')
     """
     import pandas as pd
-    from files.pfo_files import list_all_files, get_files_data
+    from files.pfo_files import list_all_files, get_file_infos
 
     # Lister les fichiers présents dans le dossier et dans tous les sous-dossiers
     liste = list_all_files(folder_path)
@@ -388,7 +388,7 @@ def show_all_photos_files_caracterictics(folder_path):
     for chemin in liste:
 
         # Obtenir les informations du répertoire et du fichier
-        data_dict = get_files_data(chemin)
+        data_dict = get_file_infos(chemin)
 
         # Obtenir les dates original et digitized de la photo 
         folder_path = data_dict['chemin complet']
@@ -436,7 +436,7 @@ def change_all_original_dates_according_to_directories_names(folder_path):
 
     """
 
-    from files.pfo_files import list_all_files, get_files_data
+    from files.pfo_files import list_all_files, get_file_infos
     from dates.pfo_dates import convert_string_to_datetime, set_duree, convert_datetime_to_string
 
     # Lister les fichiers présents dans le dossier et dans tous les sous-dossiers
@@ -451,10 +451,10 @@ def change_all_original_dates_according_to_directories_names(folder_path):
     # Parcourir tous les chemins de fichiers
     for chemin in liste:
 
-        # Obtenir les informations du répertoire et du fichier
-        data = get_files_data(chemin)
+        # Obtenir les informations sur le fichier
+        data = get_file_infos(chemin)
 
-        # Obtenir les dates original et digitized de la photo 
+        # Obtenir les noms de chemins et de répertoire 
         folder_path = data['chemin complet']
         img_filename = data['nom du fichier']
         

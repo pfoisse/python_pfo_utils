@@ -9,5 +9,10 @@ les caracterisques EXIF des photos sans les modifier
 FONCTION afficher les donnes exif (incl. date original) -> OK
 FONCTION changer la date originale des photos en fonction du repertoire -> OK
 
+28 juillet :
+création d un fichier pfo_diapo.py et d un fichier main3.py pour essayer de 
+renumeroter les fichiers SCAN DIAPO en sens inverse. not successfull at this time.
+a continuer ...
+
 
 
