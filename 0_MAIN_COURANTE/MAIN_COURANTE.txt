@@ -9,3 +9,5 @@ les caracterisques EXIF des photos sans les modifier
 FONCTION afficher les donnes exif (incl. date original) -> OK
 FONCTION changer la date originale des photos en fonction du repertoire -> OK
 
+
+

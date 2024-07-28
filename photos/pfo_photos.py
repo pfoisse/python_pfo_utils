@@ -468,19 +468,26 @@ def change_all_original_dates_according_to_directories_names(folder_path):
         else:
             i = 0
 
-        # Convertir la date du répertoire en datetime
-        new_date = convert_string_to_datetime(nom_repertoire)
+        # On fait un TRY pour gérer les erreurs au cas où le nom du répertoire n'est pas dans le format YYYY-MM-DD
+        try:
+            # Convertir la date du répertoire en datetime
+            new_date = convert_string_to_datetime(nom_repertoire)
 
-        # Ajouter la durée de 1 seconde au dernier enregistrement de la photo
-        duree = set_duree(seconds=1)
-        new_date = new_date + i * duree 
+            # Ajouter la durée de 1 seconde au dernier enregistrement de la photo
+            duree = set_duree(seconds=1)
+            new_date = new_date + i * duree 
 
-        # Convertir la date en string avec le format double points
-        new_date = convert_datetime_to_string(new_date, 'double_points')
+            # Convertir la date en string avec le format double points
+            new_date = convert_datetime_to_string(new_date, 'double_points')
+            
+            # Ajouter la date original et de la date digitilized de la photo au dictionnaire 
+            set_original_date(folder_path, img_filename, new_date)
+
+        except:
+            print(f'Erreur lors de la conversion du répertoire {nom_repertoire} en date')
+            continue
+
         
-        # Ajouter la date original et de la date digitilized de la photo au dictionnaire 
-        set_original_date(folder_path, img_filename, new_date)
-
         previous_repertoire_name = nom_repertoire
 
     
