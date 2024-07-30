@@ -1,8 +1,6 @@
 """Module providing some functions to work with files"""
 
 import os
-import pandas as pd
-from photos.pfo_photos import get_original_date
 
 # ! --------------------------------------------------------------------------------------
 def list_all_files(folder_path):
@@ -40,6 +38,40 @@ def list_all_files(folder_path):
     liste = sorted(liste)
 
     return liste
+
+# ! --------------------------------------------------------------------------------------
+def list_all_directories(folder_path):
+    """
+    Cette fonction liste les répertoires présents dans un répertoire spécifique 
+    ainsi que dans tous les sous-répertoires. 
+    Cette fonction ne liste pas les répertoires cachés (ceux qui commencent par un point).
+
+    Args:
+        folder_path (chain): chemin vers le répertoire
+        ex : folder_path = '/Users/pierre/Desktop/images'
+        
+    """
+    # Initialiser la liste
+    liste = []
+
+    # initialiser le chemin
+    rootdir = folder_path
+
+    # Lister les sous-répertoires
+    for subdir, _, _ in os.walk(rootdir):
+        # Lister les fichiers dans le répertoire
+        for file in _:
+            if not file.startswith('.'):
+                # Ajouter le chemin complet du fichier à la liste
+                pass
+        # Ajouter les noms des répertoires à la liste
+        liste.append(subdir)
+
+    # Remove the first element of the liste_repertoires list
+    liste.pop(0)
+
+    return liste
+
 
 # ! --------------------------------------------------------------------------------------
 def get_file_infos(folder_path):

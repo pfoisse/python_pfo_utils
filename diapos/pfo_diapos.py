@@ -2,7 +2,7 @@
 """
 
 #! --------------------------------------------------------------------------------------
-def rename_all_diapos_in_reverse_order(folder_path):
+def OLD_rename_all_diapos_in_reverse_order(folder_path):
     """
     
     """
@@ -51,6 +51,26 @@ def rename_all_diapos_in_reverse_order(folder_path):
 
         previous_repertoire_name = nom_repertoire
 
+
+
+#! --------------------------------------------------------------------------------------
+def rename_all_diapos_in_reverse_order(folder_path):
+    """
+    
+    """
+
+    from files.pfo_files import get_file_infos, list_all_files
+
+    # Lister les fichiers présents dans le dossier et dans tous les sous-dossiers
+    liste = list_all_files(folder_path)
+
+    print('liste des chemins = ', liste)
+
+    # Parcourir tous les chemins de fichiers
+    for chemin in liste:
+
+        fichiers_contenus_dans_repertoire = list_all_files(chemin)
+        print('contenu_du_repertoire = ', fichiers_contenus_dans_repertoire)
 
 
         

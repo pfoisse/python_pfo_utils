@@ -14,5 +14,12 @@ création d un fichier pfo_diapo.py et d un fichier main3.py pour essayer de
 renumeroter les fichiers SCAN DIAPO en sens inverse. not successfull at this time.
 a continuer ...
 
+30 juillet :
+le programme de re-numerotation des fichiers DIAPOS est fait et terminé dans main5.py
+il fonctionne, la nouvelle chaine de caractere créée est cnrrecte
+il faut maintenant renommer en dur le fichier via import os
+et mettre le code contenu dans le fichier main5.py dans une nouvelle fonction (à créer) 
+dans le fichier pfo_diapos.py
+
 
 
