@@ -21,5 +21,9 @@ il faut maintenant renommer en dur le fichier via import os
 et mettre le code contenu dans le fichier main5.py dans une nouvelle fonction (à créer) 
 dans le fichier pfo_diapos.py
 
+31 juillet :
+la fonction rename fonctionne dans le fichier main5.py mais il faut nettoyer le code
+en découpant le code pour créer des fonction et les mettre dans pfo_diapos.py
+
 
 
