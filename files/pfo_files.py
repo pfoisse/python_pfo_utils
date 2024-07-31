@@ -128,15 +128,37 @@ def get_file_infos(folder_path):
     print()
 
     # Combine le nom du répertoire et le nom du fichier pour le nom du fichier
-    nom_fichier = nom_fichier + '.' + extension
+    nom_fichier_sans_extension = nom_fichier
+    nom_fichier = nom_fichier_sans_extension + '.' + extension
+
 
     # Retourner le dictionnaire contenant les informations décrites ci-dessus
     return {
         'chemin complet': chemin_complet,
         'nom du fichier': nom_fichier, 
         'nom du répertoire': nom_repertoire, 
-        'extension': extension
+        'extension': extension,
+        'nom_fichier_sans_extension': nom_fichier_sans_extension,
     }
+
+
+# ! --------------------------------------------------------------------------------------
+def rename_file(old_name, new_name):
+    """
+    This function renames a file from an old name to a new name.
+   
+    Args:
+        old_name (str): The old name of the file.
+        new_name (str): The new name of the file.
+
+    Returns:
+        None
+    """
+    try:
+        os.rename(old_name, new_name)
+        print(f'File "{old_name}" has been successfully renamed to "{new_name}"')
+    except Exception as e:
+        print(f'An error occurred while renaming the file: {e}')
 
 
 

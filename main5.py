@@ -1,7 +1,8 @@
 
 import os
 
-from files.pfo_files import list_all_files, list_all_directories, get_file_infos
+from files.pfo_files import list_all_files, list_all_directories, get_file_infos, rename_file
+from diapos.pfo_diapos import rename_a_diapo
 
 chemin = '/Users/pierre/Desktop/images/test3'
 
@@ -48,8 +49,8 @@ for repertoire in liste_repertoires:
 
         # Obtenir les informations sur le fichier
         nom_fichier = get_file_infos(fichier)['nom du fichier']
-        
-        print('Nom du fichier :', nom_fichier)
+        old_name = os.path.join(repertoire, nom_fichier)
+        print('OLD name :', old_name)
 
         # Si le nom du fichier commence par 'DIAPO'
         if nom_fichier.startswith('DIAPO'):
@@ -58,13 +59,17 @@ for repertoire in liste_repertoires:
 
         else:
 
+            print('--------------------------------------------')
+
+            
+
             # Obtenir l'extension du fichier
             extension = '.' + get_file_infos(fichier)['extension']
 
-            # Créer le nouveau nom du fichier
-            new_name = 'DIAPO-' + first_3_chars + '-{:03d}'.format(i+1) + extension
-            print('Nouveau nom de fichier :', new_name)
-
-        print()
+            new_name = rename_a_diapo(old_name, intial_reference_tag ='DIAPO-', directory_reference_number=first_3_chars, file_number=i+1)
+            
+            print('NEW name :', new_name)
+            
+            #rename_file(old_name, new_name)
     
  
